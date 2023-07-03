@@ -1,0 +1,22 @@
+(function (ext) {
+  // Discord webhook URL
+  var webhookUrl = 'YOUR_DISCORD_WEBHOOK_URL';
+
+  // Extension API methods
+  ext.sendToDiscord = function (message) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', webhookUrl, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ content: message }));
+  };
+
+  // Extension API method descriptor
+  var descriptor = {
+    blocks: [
+      [' ', 'Send message to Discord webhook: %s', 'sendToDiscord', 'Hello, Discord!']
+    ]
+  };
+
+  // Register the extension
+  ScratchExtensions.register('Discord Extension', descriptor, ext);
+})({});
